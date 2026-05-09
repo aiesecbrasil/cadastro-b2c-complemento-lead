@@ -58,12 +58,25 @@ form {
 
 .input-group input {
     width: 100%;
+    margin-top: 10px;
     padding: 14px 12px;
     font-size: 16px;
     border: 1px solid #ccd6eb;
+    border: 1px solid #ced4da;
     border-radius: 10px;
     box-sizing: border-box;
     background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #0072ce;
+    box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.15);
+    outline: none;
+}
+
+.input-group input:focus+label {
+    color: #0072ce;
 }
 
 .input-group input:not(#password) {
@@ -74,9 +87,10 @@ form {
 .input-group label {
     position: absolute;
     left: 12px;
-    top: 27px;
+    top: 35px;
     transform: translateY(-50%);
     padding: 0 4px;
+    color: #6c757d;
     transition: 0.2s all;
     pointer-events: none;
 }
@@ -84,8 +98,11 @@ form {
 .input-group input:focus+label,
 .input-group input:not(:placeholder-shown)+label {
     top: -8px;
+    top: 0;
+    transform: translateY(-50%);
     font-size: 13px;
     color: #0072ce;
+    background-color: #ffffff;
 }
 
 /* Estilo para labels gerais que não são flutuantes */
@@ -95,6 +112,10 @@ label:not(.form-label):not(.checkbox-label) {
     color: #3c4d6b;
     margin-bottom: 8px;
     font-size: 15px;
+}
+
+.input-group-text {
+    margin-top: 10px;
 }
 
 /*
@@ -114,6 +135,7 @@ label:not(.form-label):not(.checkbox-label) {
     min-width: 120px;
     padding: 12px;
     border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #ccd6eb;
     background-color: #fff;
     font-size: 15px;
@@ -125,6 +147,7 @@ label:not(.form-label):not(.checkbox-label) {
     font-size: 16px;
     border: 1px solid #ccd6eb;
     border-radius: 8px;
+    border-radius: 10px;
     background-color: #fff;
 }
 
@@ -183,7 +206,15 @@ label:not(.form-label):not(.checkbox-label) {
     padding: 14px 12px;
     font-size: 16px;
     border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #ccd6eb;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-calendario input:focus {
+    border-color: #0072ce;
+    box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.15);
+    outline: none;
 }
 
 .input-calendario span {
@@ -205,8 +236,36 @@ label:not(.form-label):not(.checkbox-label) {
     padding: 14px 12px;
     font-size: 16px;
     border-radius: 8px;
+    font-size: 15px;
+    border-radius: 10px;
     border: 1px solid #ccd6eb;
     background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-extra select:focus {
+    border-color: #0072ce;
+    box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.15);
+    outline: none;
+}
+
+.input-extra input[type="file"] {
+    border: 1px solid #ccd6eb;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 15px;
+    width: 100%;
+}
+
+.input-extra input[type="file"]::file-selector-button {
+    background-color: #0072ce;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.2s;
 }
 
 .checkbox-group {
@@ -243,6 +302,22 @@ label:not(.form-label):not(.checkbox-label) {
     /* compatibilidade */
     white-space: pre-line; /* Isso faz com que múltiplos espaços e quebras de linha virem apenas um espaço */
    
+    /* compatibilidade */   
+    white-space: normal;
+    text-align: left;
+    width: 100%;
+    line-height: 1.7;
+    font-size: 16px;
+    color: #3c4d6b;
+    margin: 0;
+    padding: 0;
+}
+
+#DadosAqui strong {
+    color: #004a99;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 150px;
 }
 
 /*
@@ -259,8 +334,11 @@ label:not(.form-label):not(.checkbox-label) {
 .modal-title {
     font-family: 'Arial', sans-serif;
     text-align: center;
+    font-family: 'Lato', sans-serif;
     color: #004a99;
     font-weight: 600;
+    font-weight: 700;
+    width: 100%;
     text-align: center;
 
 }
@@ -277,6 +355,9 @@ label:not(.form-label):not(.checkbox-label) {
     align-items: center;
     flex-direction: column;
     background-color: #f8f9fa;
+    font-family: 'Lato', sans-serif;
+    padding: 1.5rem;
+    background-color: #fff;
 }
 
 
@@ -294,6 +375,7 @@ ul {
     margin: 0;
     border: 1px solid #ccd6eb;
     border-radius: 8px;
+    border-radius: 10px;
     max-height: 150px;
     overflow-y: auto;
     background-color: #fff;

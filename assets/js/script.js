@@ -962,7 +962,6 @@ async function handleFormCompletionSubmit(event) {
 
     // 1. Validate
     const isPasswordValid = validarSenha(document.getElementById('password').value).senhaValida;
-    const isPolicyChecked = document.getElementById('politica').checked;
     const areOptionalFieldsValid = validarDadosOpcionais(); // this shows its own modal on error
 
     if (!isPasswordValid) {
@@ -971,14 +970,6 @@ async function handleFormCompletionSubmit(event) {
         return;
     } else {
         document.getElementById('erro-senha').textContent = '';
-    }
-
-    if (!isPolicyChecked) {
-        document.getElementById('erro-politica').textContent = 'Você deve aceitar a política de privacidade.';
-        showModal({ title: "Erro", message: "É necessário aceitar a política de privacidade para continuar." });
-        return;
-    } else {
-        document.getElementById('erro-politica').textContent = '';
     }
 
     if (!areOptionalFieldsValid) {
@@ -1064,7 +1055,8 @@ async function handleFormCompletionSubmit(event) {
             esconderSpinner();
             showModal({
                 title: "Cadastro Concluído!",
-                message: "Seus dados foram enviados com sucesso.",
+                message: `Seus dados foram enviados com sucesso.
+                Em breve, um membro da AIESEC entrará em contato com você. Fique atento ao seu email e telefone!`,
                 type: "success",
                 showCancel: false,
                 confirmText: "OK",
