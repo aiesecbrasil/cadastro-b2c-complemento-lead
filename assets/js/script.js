@@ -586,8 +586,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function preencherFormularioComplemento(params) {
-    if (!params.id) {
-        showModal({ title: "Erro", message: "Link de cadastro inválido. Faltando informações." });
+    const requiredParams = ['id', 'nome', 'sobrenome', 'email', 'telefone', 'produto', 'comite'];
+    const missingParams = requiredParams.filter(p => !params[p] || params[p] === 'null');
+
+    if (missingParams.length > 0) {
+        const formEl = document.getElementById('meuForm');
+        if (formEl) formEl.style.display = 'none'; // Esconde o formulário
+
+        const greetingEl = document.getElementById('greeting');
+        if (greetingEl) greetingEl.style.display = 'none'; // Esconde a saudação
+
+        showModal({
+            title: "Link de Cadastro Inválido",
+            message: `Este link de cadastro está incompleto. Por favor, verifique o link recebido ou entre em contato com o suporte: contato@aiesec.org.br`,
+            type: "error",
+            showConfirm: false,
+            showCancel: false,
+        });
+        console.error('Parâmetros obrigatórios faltando na URL:', missingParams.join(', '));
         return;
     }
 
