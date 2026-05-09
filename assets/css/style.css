@@ -1,15 +1,23 @@
-/*
-  Layout principal do formulário:
-  - Define tipografia, largura máxima e caixa com sombra para melhor legibilidade.
-*/
 body {
     font-family: 'Lato', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.form-container {
+    width: 100%;
     max-width: 650px;
-    margin: 40px auto;
     background-color: #ffffff;
-    padding: 30px;
+    padding: 40px;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .stage {
@@ -20,13 +28,22 @@ body {
     display: block;
 }
 
+.form-logo {
+    max-width: 180px;
+    margin-bottom: 25px;
+}
+
 h2 {
     text-align: center;
     color: #004a99;
     /* Azul AIESEC */
     margin-bottom: 30px;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 600;
+}
+
+form {
+    text-align: left;
 }
 
 /*
@@ -69,6 +86,15 @@ h2 {
     top: -8px;
     font-size: 13px;
     color: #0072ce;
+}
+
+/* Estilo para labels gerais que não são flutuantes */
+label:not(.form-label):not(.checkbox-label) {
+    display: block;
+    font-weight: 600;
+    color: #3c4d6b;
+    margin-bottom: 8px;
+    font-size: 15px;
 }
 
 /*
@@ -417,9 +443,8 @@ button.loading::after {
 
 .copyright {
     margin: 20px;
-    position: relative;
-    left: 33%;
-    margin-top: 50px;
+    display: block;
+    margin-top: 30px;
     color: #004a99;
     font-weight: 500;
 }
@@ -427,20 +452,5 @@ button.loading::after {
 @media (max-width: 767px) {
     .stage-buttons {
         flex-direction: column-reverse;
-    }
-}
-
-
-/*
-  Responsividade básica para centralizar melhor o aviso de copyright.
-*/
-@media (max-width: 768px) {
-    .copyright {
-        margin: 20px;
-        position: relative;
-        left: 15%;
-        margin-top: 50px;
-        color: #004a99;
-        font-weight: 500;
     }
 }

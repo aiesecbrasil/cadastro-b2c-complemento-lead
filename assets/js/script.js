@@ -1,23 +1,20 @@
 /**
  * Tipos utilitários JSDoc para melhor legibilidade/intellisense.
  * Estes comentários não alteram a execução, apenas documentam.
- *
+ * @typedef {{
+ *   id: string | null,
+ *   nome: string,
+ *   sobrenome: string,
+ *   email: string,
+ *   telefone: string,
+ *   data_nasc: string,
+ *   produto: string | null,
+ *   nomeCl: string,
+ *   comite: string | null
+ * }} ParametrosURL
  * @typedef {{ id: string|number, text: string, status?: string }} OptionItem
  * @typedef {{ label: string, config: { settings: { options?: OptionItem[], possible_types?: string[] } } }} Campo
- * @typedef {{
- *   comite: string,
- *   produto: string,
- *   campanha: string,
- *   anuncio: string,
- *   formaAnuncio: string,
- *   rota: string
- * }} ParametrosURL
  */
-
-/** @type {HTMLDivElement} */
-const containerTelefone = document.getElementById('telefones-container');
-/** @type {HTMLDivElement} */
-const containerEmail = document.getElementById('emails-container');
 
 // Estruturas de produto com sigla e nome por extenso para facilitar matching.
 //Formato dos itens: { sigla: 'gv', nome: 'Voluntário Globa' }
@@ -27,101 +24,11 @@ const siglaProduto = [
     { sigla: 'gtalt', nome: 'Talento Global Mid e Long Term', idprograma: 8 },
     { sigla: 'gte', nome: 'Professor Global', idprograma: 9 }
 ];
-// Estruturas de escritórios (CLs) com sigla e nome por extenso para facilitar matching.
-//Formato dos itens: { sigla: 'AB', nome: 'ABC' } 
-const escritorios = [
-    { sigla: "AB", nome: "ABC" },
-    { sigla: "AJ", nome: "ARACAJU" },
-    { sigla: "BA", nome: "BAURU" },
-    { sigla: "BH", nome: "BELO HORIZONTE" },
-    { sigla: "BS", nome: "BRASÍLIA" },
-    { sigla: "CT", nome: "CURITIBA" },
-    { sigla: "FL", nome: "FLORIANÓPOLIS" },
-    { sigla: "FR", nome: "FRANCA" },
-    { sigla: "FO", nome: "FORTALEZA" },
-    { sigla: "JP", nome: "JOÃO PESSOA" },
-    { sigla: "LM", nome: "LIMEIRA" },
-    { sigla: "MZ", nome: "MACEIÓ" },
-    { sigla: "MN", nome: "MANAUS" },
-    { sigla: "MA", nome: "MARINGÁ" },
-    { sigla: "PA", nome: "PORTO ALEGRE" },
-    { sigla: "RC", nome: "RECIFE" },
-    { sigla: "RJ", nome: "RIO DE JANEIRO" },
-    { sigla: "SS", nome: "SALVADOR" },
-    { sigla: "SM", nome: "SANTA MARIA" },
-    { sigla: "GV", nome: "SÃO PAULO UNIDADE GETÚLIO VARGAS" },
-    { sigla: "MK", nome: "SÃO PAULO UNIDADE MACKENZIE" },
-    { sigla: "US", nome: "SÃO PAULO UNIDADE USP" },
-    { sigla: "SO", nome: "SOROCABA" },
-    { sigla: "UB", nome: "UBERLÂNDIA" },
-    { sigla: "VT", nome: "VITÓRIA" },
-    { sigla: "MC", nome: "BRASIL (NACIONAL)" }
-];
-const divisaoMercadoGT = {
-    "abc": "AIESEC no Brasil",
-    "aracaju": "AIESEC em Aracaju",
-    "bauru": "AIESEC em Limeira",
-    "belo horizonte": "AIESEC em Belo Horizonte",
-    "brasília": "AIESEC no Brasil",
-    "curitiba": "AIESEC no Brasil",
-    "florianópolis": "AIESEC em Florianópolis",
-    "franca": "AIESEC no Brasil",
-    "fortaleza": "AIESEC em Fortaleza",
-    "joão pessoa": "AIESEC no Brasil",
-    "limeira": "AIESEC em Limeira",
-    "maceio": "AIESEC no Brasil",
-    "manaus": "AIESEC no Brasil",
-    "maringá": "AIESEC em Maringá",
-    "porto alegre": "AIESEC em Porto Alegre",
-    "recife": "AIESEC no Brasil",
-    "rio de janeiro": "AIESEC no Rio de Janeiro",
-    "salvador": "AIESEC no Brasil",
-    "santa maria": "AIESEC no Brasil",
-    "getúlio vargas": "AIESEC em São Paulo Unidade Getúlio Vargas",
-    "mackenzie": "AIESEC em São Paulo Unidade Mackenzie",
-    "usp": "AIESEC no Brasil",
-    "sorocaba": "AIESEC no Brasil",
-    "uberlândia": "AIESEC em Uberlândia",
-    "vitória": "AIESEC no Brasil",
-    "brasil": "AIESEC no Brasil"
-};
-
-const divisaoMercadoGV = {
-    "abc": "AIESEC no Brasil",
-    "aracaju": "AIESEC em Aracaju",
-    "bauru": "AIESEC em Limeira",
-    "belo horizonte": "AIESEC em Belo Horizonte",
-    "brasília": "AIESEC no Brasil",
-    "curitiba": "AIESEC no Brasil",
-    "florianópolis": "AIESEC em Florianópolis",
-    "franca": "AIESEC no Brasil",
-    "fortaleza": "AIESEC em Fortaleza",
-    "joão pessoa": "AIESEC em João Pessoa",
-    "limeira": "AIESEC em Limeira",
-    "maceio": "AIESEC no Brasil",
-    "manaus": "AIESEC no Brasil",
-    "maringá": "AIESEC no Brasil",
-    "porto alegre": "AIESEC no Brasil",
-    "recife": "AIESEC em Recife",
-    "rio de janeiro": "AIESEC no Rio de Janeiro",
-    "salvador": "AIESEC em Salvador",
-    "santa maria": "AIESEC em Santa Maria",
-    "getúlio vargas": "AIESEC em São Paulo Unidade Getúlio Vargas",
-    "mackenzie": "AIESEC em São Paulo Unidade Mackenzie",
-    "usp": "AIESEC no Brasil",
-    "sorocaba": "AIESEC no Brasil",
-    "uberlândia": "AIESEC em Uberlândia",
-    "vitória": "AIESEC em Vitória",
-    "brasil": "AIESEC no Brasil"
-};
-const stages = document.querySelectorAll(".stage");
-const btnNext = document.getElementById("btn-next");
-//const btnPrev = document.getElementById("btn-prev");
 const idiomasDiv = document.getElementById("idiomas");
+
 const cursosDiv = document.getElementById("cursos"); // Renamed from 'cursos'
 const atuacaoDiv = document.getElementById("areas-atuacao"); // Renamed from 'atuacao'
 const mercadoDiv = document.getElementById("niveis-mercado"); // Renamed from 'mercado'
-const TOTAL_STAGES = stages.length;
 const idiomaSelecionados = [];
 
 // Global variables for selected IDs (single values, not arrays)
@@ -129,28 +36,15 @@ let selectedProductId = null;
 let selectedCommitteeId = null;
 let selectedCommitteeText = null;
 let selectedAdSourceId = null;
-let selectedAdFormId = null;
 
 let itemID = 0;
-let passou = 0;
 let todasOpcoes_idioma;
 let campos;
 let universidades;
-let listaAnuncio;
-let indiceComoConheceuAiesec;
-let indiceSiglaComite;
-let indiceSigla;
-let indiceIdioma = -1;
-let parametros;
-let produtoSolicitado;
-let aiesecProxima;
-let meioDivulgacao;
+let parametros; // Armazena os parâmetros da URL
 let todosProdutos;
 let todasAiesecs;
 let todasOpcoes_Como_Conheceu;
-let currentStage = 0; // começa no primeiro stage
-containerEmail.innerHTML = '';
-containerTelefone.innerHTML = '';
 
 /**
  * Mapeia produto (texto) para slug usado no set de universidades (gv/gt).
@@ -590,6 +484,18 @@ function showModal(options) {
     // Exibe o modal
     myModal.show();
 }
+
+// 1. Defina esta função auxiliar no seu script.js
+const lerArquivoComoBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        // O reader deve começar a ler ANTES de definir o onload em alguns casos, 
+        // mas o padrão correto é configurar os eventos e depois disparar a leitura.
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(file);
+    });
+};
 // Inicializa o fluxo principal: busca metadados e monta campos dinâmicos.
 // Em caso de erro de rede/parse, exibe modal amigável e permite recarregar.
 document.addEventListener("DOMContentLoaded", async () => {
@@ -649,31 +555,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             .filter(opcoes => opcoes.status == "active")
             .map(curr => ({ id: curr.id, text: curr.text }));
 
-        todasAiesecs = campos.find(field => field.label === "Qual é a AIESEC mais próxima de você?")
-            .config.settings.options.filter(opcoes => opcoes.status == "active")
-            .map(curr => ({ id: curr.id, text: curr.text.replace(/\s*-\s*/g, " ") }));
+        // This is the new flow.
+        // Pre-fill the form with data from URL and prepare for completion.
+        await preencherFormularioComplemento(parametros);
 
-        todasOpcoes_Como_Conheceu = campos.find(field => field.label === "Como você conheceu a AIESEC?")
-            .config.settings.options.filter(opcoes => opcoes.status == "active")
-            .map(curr => ({ id: curr.id, text: curr.text }));
+        // Create the optional fields based on the product from the URL.
+        criarCamposOpicionais(selectedProductId);
 
-        todasopçoes_Tipo_Anuncio = campos.find(field => field.label === "Como?")
-            .config.settings.options.filter(opcoes => opcoes.status == "active")
-            .map(curr => ({ id: curr.id, text: curr.text }));
-
-        // Initialize selectedId variables based on UTMs
-        // This function will now only set the global selectedId variables based on UTMs.
-        preencherDropdown(parametros);
-
-        // Now create dynamic fields and pre-select them using the selectedId variables
-        criarCampos(parametros.produto, parametros.comite, parametros.anuncio, parametros.rota);
-
-        // Add initial email and phone fields (moved from preencherDropdown)
-        addEmail();
-        addTelefone();
-
+        // Setup password validation and toggle
         alternarVisibilidadeSenha("password", "togglePassword");
         iniciarValidacaoSenha("password", "erro-senha");
+        // Add the main submit listener
+        document.getElementById('meuForm').addEventListener('submit', handleFormCompletionSubmit);
     } catch (error) {
         showModal({
             title: "Erro de conexão",
@@ -691,193 +584,44 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error('Erro ao buscar dados:', error);
     }
 });
-//---------------------Criar campo se não vinher parâmtro------------------
-/**
- * Cria dinamicamente campos de Produto, AIESEC e Como conheceu quando faltarem
- * parâmetros UTM correspondentes.
- *
- * @param {string|undefined} programa Sigla do produto (ex: 'gv')
- * @param {string|undefined} comite Sigla do comitê local (ex: 'RJ')
- * @param {string|undefined} anuncio Slug de "Como conheceu"
- * @param {string|undefined} rota Slug da rota (pode pré-selecionar produto)
- */
-function criarCampos(programa, comite, anuncio, rota) {
-    const programasDiv = document.getElementById("produtos");
-    const universidadesDiv = document.getElementById("universidades");
-    const aiesecDiv = document.getElementById("aiesecs");
-    const conheceAiesecDiv = document.getElementById("conheceAiesec");
 
-    if (!programa) {
-        programasDiv.innerHTML = `
-        <label for="produto">Produto *</label>
-                <select id="produto" name="produto" required>
-                    <option value>Carregando...</option>
-                </select>
-                <div class="error-msg" id="erro-produto"></div>
-        `
-        //__________________________________________BOTÃO PRODUTO____________________________________________________
-        // Cria o menu suspenso
-        const dropdown = document.getElementById('produto');
-        dropdown.innerHTML = '';
-        dropdown.setAttribute("disabled", "")
-
-        // Cria um botão com a frase "Carregando" enquanto o Menu Suspenso está desativado
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = 'Carregando';
-        dropdown.appendChild(defaultOption);
-
-        defaultOption.setAttribute('disabled', '');
-        defaultOption.setAttribute('selected', '');
-
-        //____________________________________________________________________________________________________
-        //____________________________Lógica Produtos_____________________________________________________
-        // Use the globally populated todosProdutos
-        todosProdutos.forEach((produto, index) => {
-            const newOption = document.createElement("option");
-            newOption.value = produto.id;
-            newOption.textContent = produto.text;
-
-            // Pre-select if selectedProductId was set by UTM/rota
-            if (selectedProductId !== null && String(produto.id) === String(selectedProductId)) {
-                newOption.selected = true;
-            }
-            dropdown.appendChild(newOption);
-        });
-
-        // Quando todas as opções estiverem prontas o botão se tranforma em "Selecione" e 
-        // ativa o Menu Suspenso novamente
-        defaultOption.textContent = "Selecione";
-        dropdown.removeAttribute("disabled");
-
-        //________________________________________________________________________________________________
-        // Add event listener to update selectedProductId when user changes selection
-        dropdown.addEventListener('change', (event) => {
-            selectedProductId = event.target.value;
-        });
+async function preencherFormularioComplemento(params) {
+    if (!params.id) {
+        showModal({ title: "Erro", message: "Link de cadastro inválido. Faltando informações." });
+        return;
     }
-    if (!comite) {
-        universidadesDiv.innerHTML = `
-        <div id="container-universidades">
-            <label for="combo-input-universidades">Qual é a sua universidade? *</label>
-            <div class="error-msg" id="erro-universidade"></div>
-        </div>
 
-        <div class="input-extra checkbox-group" style="margin-top: 10px;">
-            <label class="checkbox-label">
-                <input type="checkbox" id="sem-universidade" name="sem-universidade" />
-                <span>Minha universidade não está listada ou não tenho vínculo com nenhum universidade</span>
-            </label>
-        </div>
-        `;
+    itemID = params.id; // Set global itemID
 
-        const containerUniversidades = document.getElementById("container-universidades");
-        const produtoSlug = getProdutoSlug(programa || todosProdutos.find(p => String(p.id) === String(selectedProductId))?.text || '');
-        const optionsUniversidades = getUniversidadesPorProduto(produtoSlug);
+    // Set greeting
+    const greetingEl = document.getElementById('greeting');
+    if (greetingEl) {
+        greetingEl.textContent = `Olá, ${params.nome} ${params.sobrenome}!`;
+    }
 
-        buildCombo({
-            container: containerUniversidades,
-            inputId: 'combo-input-universidades',
-            listId: 'combo-list-universidades',
-            hiddenId: 'universidade',
-            placeholder: 'Digite ou selecione a Universidade ou faculdade (em curso ou concluída)',
-            options: optionsUniversidades
-        });
-
-        aiesecDiv.innerHTML = `
-        <div id="container-aiesec-proxima" style="display: none; margin-top: 15px;">
-            <label for="combo-input-aiesec">Qual é a AIESEC mais próxima de você? *</label>
-        </div>
-        <div class="error-msg" id="erro-aiesec"></div>
-        `;
-
-        const containerAiesecProxima = document.getElementById("container-aiesec-proxima");
-        const checkboxSemUniversidade = document.getElementById("sem-universidade") || false;
-        const universidadeInput = document.getElementById("combo-input-universidades");
-        const universidadeHidden = document.getElementById("universidade");
-
-        buildCombo({
-            container: containerAiesecProxima,
-            inputId: 'combo-input-aiesec',
-            listId: 'combo-list-aiesec',
-            hiddenId: 'aiesec',
-            placeholder: 'Digite ou selecione',
-            options: todasAiesecs
-        });
-
-        checkboxSemUniversidade.addEventListener("change", function () {
-            if (this.checked) {
-                containerAiesecProxima.style.display = "block";
-                if (universidadeInput) {
-                    universidadeInput.value = "";
-                    universidadeInput.disabled = true;
-                }
-                if (universidadeHidden) {
-                    universidadeHidden.value = "";
-                }
-            } else {
-                containerAiesecProxima.style.display = "none";
-                if (universidadeInput) {
-                    universidadeInput.disabled = false;
-                }
-                // Mantém a universidade selecionada quando desmarca "sem universidade".
-                // Não limpar o valor aqui permite manter ou restaurar a seleção.
-
-                const inputAiesec = document.getElementById("combo-input-aiesec");
-                const hiddenAiesec = document.getElementById("aiesec");
-
-                if (inputAiesec) inputAiesec.value = "";
-                if (hiddenAiesec) hiddenAiesec.value = "";
-
-                const erroAiesec = document.getElementById("erro-aiesec");
-                if (erroAiesec) erroAiesec.textContent = "";
-            }
-
-            const erroUniversidade = document.getElementById("erro-universidade");
-            if (erroUniversidade) erroUniversidade.textContent = "";
-        });
-
-        if (universidadeHidden) {
-            universidadeHidden.addEventListener('change', function () {
-                if (this.value === 'Outra') {
-                    checkboxSemUniversidade.checked = true;
-                    checkboxSemUniversidade.dispatchEvent(new Event('change'));
-                } else {
-                    checkboxSemUniversidade.checked = false;
-                    checkboxSemUniversidade.dispatchEvent(new Event('change'));
-                }
-            });
+    // Data de Nascimento
+    if (params.data_nasc && params.data_nasc !== 'null') {
+        const dateParts = params.data_nasc.split('-'); // Expects YYYY-MM-DD
+        if (dateParts.length === 3) {
+            const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+            setDate(date); // This function updates both visible and ISO inputs
         }
     }
-    if (typeof anuncio === 'undefined' || !anuncio) {
-        conheceAiesecDiv.innerHTML = `
-        <label for="combo-input-conheceu">Como você conheceu a AIESEC? *</label>
-        `;
 
-        // Use the globally populated todasOpcoes_Como_Conheceu
-        let preselectIndex = -1;
-        if (selectedAdSourceId !== null) {
-            preselectIndex = todasOpcoes_Como_Conheceu.findIndex(o => o.id === selectedAdSourceId);
-        }
+    // Produto
+    const idProgramaExpa = parseInt(params.produto, 10);
+    const productEntry = siglaProduto.find(p => p.idprograma === idProgramaExpa);
+    if (productEntry) {
+        const product = todosProdutos.find(p => p.text.toLowerCase().includes(productEntry.nome.toLowerCase()));
+        if (product) selectedProductId = product.id;
+    }
 
-        buildCombo({
-            container: conheceAiesecDiv,
-            inputId: 'combo-input-conheceu',
-            listId: 'combo-list-conheceu',
-            hiddenId: 'conheceu',
-            placeholder: 'Digite ou selecione', // Placeholder for the combo box
-            options: todasOpcoes_Como_Conheceu,
-            preselectIndex: preselectIndex >= 0 ? preselectIndex : undefined // Use the preselectIndex calculated above
-        });
-        // Update selectedAdSourceId when combo value changes
-        const hiddenConheceu = document.getElementById('conheceu');
-        if (hiddenConheceu) {
-            hiddenConheceu.addEventListener('change', (event) => {
-                selectedAdSourceId = event.target.value;
-            });
-        }
-
-        conheceAiesecDiv.insertAdjacentHTML('beforeend', '<div class="error-msg" id="erro-conheceu"></div>');
+    // Comitê
+    if (params.comite) {
+        selectedCommitteeId = params.comite;
+        const committee = todasAiesecs.find(c => String(c.id) === String(params.comite));
+        if (committee) selectedCommitteeText = committee.text;
+        else selectedCommitteeText = params.nomeCl; // fallback to name from URL
     }
 }
 
@@ -1013,20 +757,6 @@ function limparTelefoneFormatado(valorFormatado) {
     return valorFormatado.replace(/\D/g, ''); // remove tudo que não for número
 }
 
-// Exemplo de uso no envio do formulário
-document.getElementById('meuForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    // Antes de enviar, pegar todos os campos de telefone e limpar a formatação
-    const telefones = document.querySelectorAll('input[name="telefone[]"]');
-    telefones.forEach(input => {
-        input.value = input.value;
-    });
-
-    // Se fosse enviar de verdade:
-    // this.submit();
-});
-
 
 
 /**
@@ -1046,188 +776,6 @@ function aplicarValidacaoTelefone(input) {
             erro.textContent = "";
         }
     });
-}
-
-
-// -------------------- Validação de e-mail --------------------
-/**
- * Valida formato de e-mail básico no blur.
- * Mantém estrutura para futura validação de provedores (comentada).
- * @param {HTMLInputElement} input
- */
-function validarEmailComProvedor(input) {
-    input.addEventListener('blur', function (e) {
-        const valor = e.target.value.trim();
-        const erro = document.getElementById('erro-email');
-
-        // Regex para verificar formato de e-mail
-        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/;
-        if (!regex.test(valor)) {
-            erro.textContent = "E-mail inválido.";
-            return;
-        }
-
-        /*// Lista de provedores conhecidos
-        const provedores = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'icloud.com'];
-        const dominio = valor.split('@')[1].toLowerCase();
-
-        if (!provedores.includes(dominio)) {
-            erro.textContent = "Por favor, use um e-mail de provedor comum (ex: gmail.com, hotmail.com, icloud.com, outlook.com)";
-            camposErro.push("Use um e-mail de provedor comum \n (ex: gmail.com, hotmail.com, icloud.com, hotmail.com)")
-        } else {
-            erro.textContent = ""; // Tudo certo
-        }*/else {
-            document.getElementById('erro-email').textContent = "";
-        }
-    });
-}
-// -------------------- Validação de nome/sobrenome --------------------
-/**
- * Valida um input permitindo apenas letras (inclui acentuadas) e espaços.
- * @param {string} id Id do input a validar
- * @param {string} erroId Id do span/alvo de mensagem de erro
- */
-function validarNome(id, erroId) {
-    const input = document.getElementById(id);
-    const erro = document.getElementById(erroId);
-    input.addEventListener('blur', function () {
-        const regex = /^[A-Za-zÀ-ÿ\s]+$/;
-        if (!regex.test(input.value.trim())) {
-            erro.textContent = "Use apenas letras e espaços.";
-        } else {
-            erro.textContent = "";
-        }
-    });
-}
-
-validarNome('nome', 'erro-nome');
-validarNome('sobrenome', 'erro-sobrenome');
-
-// -------------------- Aplicar validações iniciais --------------------
-document.querySelectorAll('input[name="email[]"]').forEach(input => {
-    validarEmailComProvedor(input)
-});
-document.querySelectorAll('input[name="telefone[]"]').forEach(input => {
-    aplicarMascaraTelefone(input);
-    aplicarValidacaoTelefone(input);
-});
-
-// -------------------- Adicionar/Remover campos --------------------
-/**
- * Adiciona um bloco de e-mail com select de tipos traduzidos e input email.
- * Efeitos colaterais: altera DOM (#emails-container) e envia postMessage ao parent.
- */
-async function addEmail() {
-
-    const div = document.createElement('div');
-
-    const tipoEmail = campos.find(field => field.label === "Email");
-    const opcoesDeTipoEmail = tipoEmail.config.settings.possible_types;
-
-    div.className = 'campo-multiplo';
-
-    // Traduz cada tipo
-    const traducoes = await Promise.all(opcoesDeTipoEmail.map(tipo => traduzirPalavras([tipo])));
-
-    let optionsHTML = '';
-    traducoes.forEach(trad => {
-        const t = trad[0]; // traduzirPalavras retorna array de objetos
-        if (t.original === "other") {
-            optionsHTML += `<option value="${t.original.toLowerCase()}" selected>${t.traduzido}</option>`;
-        } else {
-            optionsHTML += `<option value="${t.original.toLowerCase()}">${t.traduzido}</option>`;
-        }
-    });
-
-    // Monta o HTML do campo
-    div.innerHTML = `
-                <select name="emailTipo[]">
-                    ${optionsHTML}
-                </select>
-                <input type="email" name="email[]" placeholder="Email" />
-                <button type="button" id="remove-email" class="remove-btn" onclick="removeCampo(this, 'email')">✖</button>
-            `;
-
-    containerEmail.appendChild(div);
-    validarEmailComProvedor(div.querySelector('input'));
-    // Atualiza botões de remoção
-    const botoes = containerEmail.querySelectorAll('.remove-btn');
-    botoes.forEach(btn => (btn.disabled = botoes.length === 1));
-    window.parent.postMessage('campoAdicionado', 'https://aiesec.org.br/');
-}
-
-
-/**
- * Adiciona um bloco de telefone, aplica máscara e validação.
- * Efeitos colaterais: altera DOM (#telefones-container) e envia postMessage ao parent.
- */
-async function addTelefone() {
-
-    const div = document.createElement('div');
-
-    // Pega o campo "Telefone" dentro do array 'campos'
-    const tipoTelefone = campos.find(field => field.label === "Telefone");
-    const opcoesDeTipoTelefone = tipoTelefone.config.settings.possible_types;
-
-    div.className = 'campo-multiplo';
-
-    // Traduz cada tipo
-    const traducoes = await Promise.all(opcoesDeTipoTelefone.map(tipo => traduzirPalavras([tipo])));
-
-    let optionsHTML = '';
-    traducoes.forEach(trad => {
-        const t = trad[0]; // traduzirPalavras retorna array de objetos
-        if (t.original === "other") {
-            optionsHTML += `<option value="${t.original.toLowerCase()}" selected>${t.traduzido}</option>`;
-        } else {
-            optionsHTML += `<option value="${t.original.toLowerCase()}">${t.traduzido}</option>`;
-        }
-    });
-
-    // Monta o HTML do campo de telefone
-    div.innerHTML = `
-                <select name="telefoneTipo[]">
-                    ${optionsHTML}
-                </select>
-                <input type="tel" name="telefone[]" placeholder="Telefone" />
-                <button type="button" id="remove-telefone" class="remove-btn" onclick="removeCampo(this, 'telefone')">✖</button>
-            `;
-
-    containerTelefone.appendChild(div);
-
-    // Aplica as funções utilitárias
-    aplicarMascaraTelefone(div.querySelector('input'));
-    aplicarValidacaoTelefone(div.querySelector('input'));
-
-    // Atualiza botões de remoção
-    const botoes = containerTelefone.querySelectorAll('.remove-btn');
-    botoes.forEach(btn => (btn.disabled = botoes.length === 1));
-    window.parent.postMessage('campoAdicionado', 'https://aiesec.org.br/');
-}
-
-/**
- * Remove um bloco (email/telefone) mantendo pelo menos um.
- * @param {HTMLButtonElement} botao
- * @param {"email"|"telefone"} tipo
- */
-function removeCampo(botao, tipo) {
-    const container = tipo === 'email'
-        ? document.getElementById('emails-container')
-        : document.getElementById('telefones-container');
-
-    // Remove o campo
-    if (container.children.length > 1) {
-        container.removeChild(botao.parentNode);
-        window.parent.postMessage('campoRemovido', 'https://aiesec.org.br/');
-    }
-
-    // Se sobrou apenas 1 campo, desabilita o botão de remoção dele
-    if (container.children.length === 1) {
-        const ultimoBotao = container.querySelector('.remove-btn');
-        if (ultimoBotao) {
-            ultimoBotao.disabled = true;
-        }
-    }
 }
 
 // -------------------- Pikaday - Data de nascimento --------------------
@@ -1306,163 +854,6 @@ inputVisivel.addEventListener('input', () => {
         }
     }
 });
-
-function validarDadosObrigatorios() {
-    let valido = true;
-    const camposErro = [];
-
-    const setErro = (id, message) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = message;
-    };
-
-    const clearErro = (id) => setErro(id, '');
-
-    // Nome e sobrenome
-    const nome = document.getElementById('nome')?.value.trim() || '';
-    const sobrenome = document.getElementById('sobrenome')?.value.trim() || '';
-    const nomeRegex = /^[A-Za-zÀ-ÿ\s]+$/;
-
-    if (!nomeRegex.test(nome)) {
-        setErro('erro-nome', 'Nome inválido.');
-        camposErro.push('Nome inválido.');
-        valido = false;
-    } else clearErro('erro-nome');
-
-    if (!nomeRegex.test(sobrenome)) {
-        setErro('erro-sobrenome', 'Sobrenome inválido.');
-        camposErro.push('Sobrenome inválido.');
-        valido = false;
-    } else clearErro('erro-sobrenome');
-
-    // Senha
-    const senha = document.getElementById('password')?.value || '';
-    const senhaValidacao = validarSenha(senha);
-    if (!senhaValidacao.senhaValida) {
-        const mensagem = senha ? 'Senha inválida.' : 'A senha não pode ser vazia.';
-        setErro('erro-senha', mensagem);
-        camposErro.push(mensagem);
-        valido = false;
-    } else {
-        clearErro('erro-senha');
-    }
-
-    // Email
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/;
-    const emails = Array.from(document.querySelectorAll('input[name="email[]"]'));
-    let emailTemErro = false;
-    if (emails.length === 0) {
-        setErro('erro-email', 'Informe pelo menos um e-mail.');
-        camposErro.push('Informe um e-mail válido.');
-        emailTemErro = true;
-    } else {
-        emails.forEach(input => {
-            const valor = (input.value || '').trim();
-            if (!emailRegex.test(valor)) {
-                emailTemErro = true;
-            }
-        });
-    }
-    if (emailTemErro) {
-        setErro('erro-email', 'E-mail inválido.');
-        camposErro.push('E-mail inválido.');
-        valido = false;
-    } else clearErro('erro-email');
-
-    // Telefone
-    const telefoneRegex = /^\(\d{2}\)\s9\s\d{4}-\d{4}$/;
-    const telefones = Array.from(document.querySelectorAll('input[name="telefone[]"]'));
-    let telefoneTemErro = false;
-    if (telefones.length === 0) {
-        setErro('erro-telefone', 'Informe pelo menos um telefone.');
-        camposErro.push('Informe um telefone válido.');
-        telefoneTemErro = true;
-    } else {
-        telefones.forEach(input => {
-            const valor = (input.value || '').trim();
-            if (!telefoneRegex.test(valor)) telefoneTemErro = true;
-        });
-    }
-    if (telefoneTemErro) {
-        setErro('erro-telefone', 'Telefone inválido. Use o formato (DD) 9 XXXX-XXXX');
-        camposErro.push('Telefone inválido.');
-        valido = false;
-    } else clearErro('erro-telefone');
-
-    // Data
-    const nascimento = document.getElementById('nascimento')?.value.trim() || '';
-    const dataRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-    if (!dataRegex.test(nascimento)) {
-        setErro('erro-nascimento', 'Data inválida.');
-        camposErro.push('Data inválida.');
-        valido = false;
-    } else clearErro('erro-nascimento');
-
-    // Produto
-    if (!selectedProductId) {
-        setErro('erro-produto', 'Selecione o produto.');
-        camposErro.push('Produto não selecionado.');
-        valido = false;
-    } else clearErro('erro-produto');
-
-    // Universidade / AIESEC
-    const semUniversidade = document.getElementById('sem-universidade')?.checked;
-    const universidadeHidden = document.getElementById('universidade')?.value;
-    const aiesecHidden = document.getElementById('aiesec')?.value;
-
-    if (semUniversidade) {
-        clearErro('erro-universidade');
-        if (!aiesecHidden && !selectedCommitteeId) {
-            setErro('erro-aiesec', 'Selecione ou digite a AIESEC mais próxima de você.');
-            camposErro.push('AIESEC obrigatória quando universidade não está listada.');
-            valido = false;
-        } else {
-            clearErro('erro-aiesec');
-        }
-    } else {
-        clearErro('erro-aiesec');
-        if (!universidadeHidden && !selectedCommitteeId) {
-            setErro('erro-universidade', 'Selecione sua universidade.');
-            camposErro.push('Universidade obrigatória.');
-            valido = false;
-        } else {
-            clearErro('erro-universidade');
-        }
-    }
-
-    // Como conheceu
-    const conheceuHidden = document.getElementById('conheceu')?.value;
-    if (!conheceuHidden && !selectedAdSourceId) {
-        setErro('erro-conheceu', 'Selecione ou digite como você conheceu a AIESEC.');
-        camposErro.push('Como conheceu é obrigatório.');
-        valido = false;
-    } else {
-        clearErro('erro-conheceu');
-    }
-
-    // Política
-    const politica = document.getElementById('politica')?.checked;
-    if (!politica) {
-        setErro('erro-politica', 'Você deve aceitar a política de privacidade.');
-        camposErro.push('Política de privacidade não aceita.');
-        valido = false;
-    } else {
-        clearErro('erro-politica');
-    }
-
-    if (valido) {
-        return true;
-    }
-
-    return showModal({
-        title: 'Dados incorretos.',
-        message: `Por favor, corrija os erros e tente novamente.\n\n${camposErro.map(campo => `- ${campo}`).join('\n')}`,
-        type: 'error',
-        showConfirm: false,
-        showCancel: true,
-        cancelText: 'Corrigir'
-    });
-}
 
 function validarDadosOpcionais() {
     let valido = true;
@@ -1550,420 +941,135 @@ function validarDadosOpcionais() {
     }
 }
 
-async function enviarFormularioObrigatorio() {
-    return new Promise(resolve => {
-        // Coleta e normalização dos dados do formulário para exibição e envio
-        const nome = document.getElementById('nome').value;
-        const sobrenome = document.getElementById('sobrenome').value;
-        const senha = document.getElementById('password').value;
-        const emails = Array.from(document.querySelectorAll('input[name="email[]"]')).map((el, i) => {
-            const select = document.querySelectorAll('select[name="emailTipo[]"]')[i];
-            const textoTipoOriginal = select.value;
-            const textoTipoTraduzido = select.selectedOptions[0].text;
-            return {
-                email: el.value,
-                tipo: textoTipoOriginal,
-                tipoTraduzido: textoTipoTraduzido
-            };
-        });
+async function handleFormCompletionSubmit(event) {
+    event.preventDefault();
 
-        const telefones = Array.from(document.querySelectorAll('input[name="telefone[]"]')).map((el, i) => {
-            const select = document.querySelectorAll('select[name="telefoneTipo[]"]')[i];
-            const textoTipoOriginal = select.value;
-            const textoTipoTraduzido = select.selectedOptions[0].text;
+    // 1. Validate
+    const isPasswordValid = validarSenha(document.getElementById('password').value).senhaValida;
+    const isPolicyChecked = document.getElementById('politica').checked;
+    const areOptionalFieldsValid = validarDadosOpcionais(); // this shows its own modal on error
 
-            return {
-                numero: el.value,
-                tipo: textoTipoOriginal,
-                tipoTraduzido: textoTipoTraduzido
-            };
-        });
+    if (!isPasswordValid) {
+        document.getElementById('erro-senha').textContent = 'Senha inválida. Verifique os requisitos.';
+        showModal({ title: "Erro", message: "Sua senha não atende aos requisitos de segurança." });
+        return;
+    } else {
+        document.getElementById('erro-senha').textContent = '';
+    }
 
-        const telefonesEnvio = telefones.map(t => ({
-            numero: limparTelefoneFormatado(t.numero),
-            tipo: t.tipo
-        }));
+    if (!isPolicyChecked) {
+        document.getElementById('erro-politica').textContent = 'Você deve aceitar a política de privacidade.';
+        showModal({ title: "Erro", message: "É necessário aceitar a política de privacidade para continuar." });
+        return;
+    } else {
+        document.getElementById('erro-politica').textContent = '';
+    }
 
-        const emailsEnvio = emails.map(e => ({
-            email: e.email,
-            tipo: e.tipo
-        }));
+    if (!areOptionalFieldsValid) {
+        return; // Modal is already shown by the function
+    }
 
-        let dados = `<strong>Nome</strong>: ${nome}<br><strong>Sobrenome</strong>: ${sobrenome}<br><strong>Emails</strong>: ${emails.map(email => `${email.email} (${email.tipoTraduzido})`).join('<br>\t')}<br>
-<strong>Telefones</strong>: ${telefones.map(telefone => `${telefone.numero} (${telefone.tipoTraduzido})`).join('<br>\t')}<br>
-<strong>Data de Nascimento</strong>: ${inputVisivel.value}<br>`;
+    // 2. Collect all data
+    const data = {
+        id: itemID, // from URL
+        // Pre-filled data
+        nome: parametros.nome,
+        sobrenome: parametros.sobrenome,
+        emails: [{ email: parametros.email, tipo: 'other' }], // Assuming 'other'
+        telefones: [{ numero: limparTelefoneFormatado(parametros.telefone), tipo: 'other' }],
+        dataNascimento: document.getElementById('nascimento-iso').value || null,
+        idProduto: selectedProductId,
+        idComite: selectedCommitteeId,
+        nomeCL: selectedCommitteeText,
+        idAutorizacao: "1", // from old code
+        // New data from user
+        senha: document.getElementById('password').value,
+        idiomas: idiomaSelecionados?.map(id => id.id) ?? null,
+        area_atuacao: parseInt(document.getElementById("area-atuacao")?.value) || null,
+        nivel_mercado: parseInt(document.getElementById('nivel')?.value) || null,
+        curso: document.getElementById("curso")?.value || null,
+        semestre: document.getElementById("semestre")?.value || null,
+    };
 
-        // Adiciona só se o campo existir
-        if (produtoSolicitado) {
-            dados += `<strong>Produto</strong>: ${produtoSolicitado.options[produtoSolicitado.selectedIndex].textContent}<br>`;
+    // Handle file upload
+    const curriculoInput = document.getElementById("curriculo");
+    const file = curriculoInput?.files[0];
+    if (file) {
+        try {
+            data.file = await lerArquivoComoBase64(file);
+            data.fileName = file.name;
+        } catch (e) {
+            console.error("Erro ao ler o arquivo:", e);
+            showModal({ title: "Erro", message: "Não foi possível processar o seu currículo. Tente novamente sem o arquivo." });
         }
+    }
 
-        const produtoSlug = getSelectedProductSlug();
-        const codigoUniversidade = produtoSlug === 'gv' ? 'ogv' : 'ogt';
-        const universidadeInput = document.getElementById('combo-input-universidades')?.value?.trim() || document.getElementById('universidade')?.value?.trim();
-        const semUniversidade = document.getElementById('sem-universidade')?.checked || false;
-        const aiesecTexto = document.getElementById('combo-input-aiesec')?.value?.trim() || '';
-        const conheceuTexto = document.getElementById('combo-input-conheceu')?.value?.trim() || '';
-        const nomeCLUniversidade = getNomeCLFromUniversidade(universidadeInput, produtoSlug);
-        const divisaoMercado = (selectedProductId == 1) ? divisaoMercadoGV : divisaoMercadoGT;
-        const nomeCL = nomeCLUniversidade || aiesecTexto || divisaoMercado[selectedCommitteeText.toLowerCase()] || selectedCommitteeText;
-        const comiteMatch = todasAiesecs.find(opcao =>
-            opcao.text.toLowerCase().includes(nomeCL.toLowerCase())
-        );
+    // 3. Show confirmation modal
+    let dadosConfirmacao = `
+        <strong>Nome</strong>: ${data.nome} ${data.sobrenome}<br>
+        <strong>Email</strong>: ${parametros.email}<br>
+        <strong>Telefone</strong>: ${parametros.telefone}<br>
+        <strong>Data de Nascimento</strong>: ${document.getElementById('nascimento').value}<br>
+        <strong>Senha</strong>: ********<br>
+    `;
 
-        const idComiteParaPodio = comiteMatch ? comiteMatch.id : 39;
-        selectedCommitteeId = idComiteParaPodio;
-        if (nomeCLUniversidade) {
-            const committeeIdMapeado = getAiesecIdFromNome(nomeCLUniversidade);
-            if (committeeIdMapeado) {
-                selectedCommitteeId = committeeIdMapeado;
-                selectedCommitteeText = nomeCLUniversidade;
+    if (data.idiomas && data.idiomas.length > 0) {
+        dadosConfirmacao += `<strong>Idiomas</strong>: ${idiomaSelecionados.map(i => i.text).join(', ')}<br>`;
+    }
+    if (data.curso) dadosConfirmacao += `<strong>Curso</strong>: ${data.curso}<br>`;
+    if (data.area_atuacao) dadosConfirmacao += `<strong>Área de Atuação</strong>: ${document.querySelector('#area-atuacao option:checked').textContent}<br>`;
+    if (data.nivel_mercado) dadosConfirmacao += `<strong>Nível Profissional</strong>: ${document.querySelector('#nivel option:checked').textContent}<br>`;
+    if (data.semestre) dadosConfirmacao += `<strong>Semestre</strong>: ${document.querySelector('#semestre option:checked').textContent}<br>`;
+
+    const modal = document.getElementById('exampleModalLong');
+    const myModal = new bootstrap.Modal(modal);
+    document.getElementById("exampleModalLongTitle").textContent = "Confirme seus dados";
+    document.getElementById("DadosAqui").innerHTML = dadosConfirmacao;
+    myModal.show();
+
+    const botaoConfirmar = document.getElementById("botaoConfirmar");
+    botaoConfirmar.replaceWith(botaoConfirmar.cloneNode(true));
+    document.getElementById("botaoConfirmar").addEventListener("click", async () => {
+        myModal.hide();
+        mostrarSpinner();
+
+        try {
+            const response = await fetch("https://baziAiesec.pythonanywhere.com/adicionar-card", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                const backendError = await response.json().catch(() => null);
+                throw { status: response.status, backend: backendError };
             }
-        }
 
-        if (aiesecTexto) {
-            const committeeIdMapeado = getAiesecIdFromNome(divisaoMercado[aiesecTexto.replace("AIESEC em ", "").replace("AIESEC no ", "").toLowerCase()]);
-            selectedCommitteeId = committeeIdMapeado || aiesecTexto;
-            selectedCommitteeText = divisaoMercado[aiesecTexto.replace("AIESEC em ", "").replace("AIESEC no ", "").toLowerCase().toLowerCase()] || aiesecTexto;
-        }
-
-        if (!selectedCommitteeId) {
-            selectedCommitteeId = document.getElementById('aiesec')?.value?.trim() || selectedCommitteeId;
-        }
-        if (!selectedCommitteeText) {
-            selectedCommitteeText = document.getElementById('combo-input-aiesec')?.value?.trim() || selectedCommitteeText;
-        }
-
-        if (!semUniversidade && document.getElementById('sem-universidade')) {
-            dados += `<strong>Universidade</strong>: ${universidadeInput || 'Não informada'}<br>`;
-        } else if (semUniversidade && document.getElementById('sem-universidade')) {
-            const universidadeTextoAvulso = universidadeInput ? `${universidadeInput} (não listada)` : 'Não está cursando ou não está listada';
-            dados += `<strong>Universidade</strong>: ${universidadeTextoAvulso}<br>`;
-        }
-        if (aiesecTexto) {
-            dados += `<strong>AiESEC mais próxima</strong>: ${nomeCL || selectedCommitteeText}<br>`;
-        }
-
-        if (conheceuTexto) {
-            dados += `<strong>Como conheceu</strong>: ${conheceuTexto}<br>`;
-        }
-
-        // Código interno para envios back-end
-        // Mantém use acima no bloco data que segue
-
-
-        // Sempre presente
-        dados += `<strong>Aceitou Política</strong>: Sim`;
-        // Mostra os dados no Modal
-        const modal = document.getElementById('exampleModalLong');
-        const myModal = new bootstrap.Modal(modal);
-        const botaoConfirmar = document.getElementById("botaoConfirmar");
-        const botaoRemover = document.getElementById("botaoCancelar");
-        const tituloModal = document.getElementById("exampleModalLongTitle");
-
-        tituloModal.textContent = "Confirme seus dados";
-        // 🔹 Restaura o estado padrão dos botões caso tenha havido erro antes
-        botaoConfirmar.style.display = 'inline-block';
-        botaoConfirmar.disabled = false;
-        botaoConfirmar.textContent = "Confirmar";
-        botaoRemover.textContent = "Editar dados";
-
-        document.getElementById("DadosAqui").innerHTML = dados;
-        myModal.show();
-
-        // Remove listener antigo e adiciona o novo
-        botaoConfirmar.replaceWith(botaoConfirmar.cloneNode(true));
-        const novoBotaoConfirmar = document.getElementById("botaoConfirmar");
-        novoBotaoConfirmar.addEventListener("click", async function handleSubmit(e) {
-            e.preventDefault();
-            // Fecha o modal de confirmação
-            myModal.hide();
-            mostrarSpinner();
-            // Aguarda o modal terminar de fechar
-            await esperarModalFechar(modal);
-
-            const mapeamentoProgramas = { 1: 7, 3: 8, 6: 8, 4: 9 };
-
-            const data = {
-                // Use the global selectedId variáveis
-                nome,
-                sobrenome,
-                senha,
-                universidade: universidadeInput,
-                idprograma: selectedProductId == 1 ? 7 : selectedProductId == 3 || selectedProductId == 6 ? 8 : selectedProductId == 4 ? 9 : null,
-                nomeCL: nomeCL == "MC BAZI" ? "AIESEC no Brasil" : (nomeCL || selectedCommitteeText).replace(/\bs[aã]o\s*p[aã]ulo\s+unidade\b/gi, '')?.replace(/\s+/g, ' ').trim(),
-                emails: emailsEnvio,
-                telefones: telefonesEnvio,
-                dataNascimento: inputISO.value,
-                idProduto: selectedProductId,
-                idComite: nomeCL == "MC BAZI" ? 39 : selectedCommitteeId,
-                idCategoria: selectedAdSourceId,
-                idAutorizacao: "1",
-                idAnuncio: selectedAdFormId || 0,
-                tag: slugify(parametros.campanha)
-            };
-            
-            try {
-                const response = await fetch("https://baziAiesec.pythonanywhere.com/adicionar-card", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                });
-
-                if (!response.ok) {
-                    let backend = null;
-                    try { backend = await response.json(); } catch (_) { backend = null; }
-                    throw { status: response.status, backend };
+            esconderSpinner();
+            showModal({
+                title: "Cadastro Concluído!",
+                message: "Seus dados foram enviados com sucesso.",
+                type: "success",
+                showCancel: false,
+                confirmText: "OK",
+                onConfirm: () => {
+                    window.location.href = 'http://localhost:5500/';
                 }
+            });
 
-                const result = await response.json();
-                itemID = result.data?.item_id || 0;
-
-                itemID = itemID || 0;
-                esconderSpinner();
-                showModal({
-                    title: "Dados enviados com sucesso!",
-                    message:
-                        `Em breve entraremos em contato com você, fique atento ao e-mail ou ao telefone que você informou, e lembre-se:
-                        senha cadastrada: ${senha} 
-                        e-mail referencia que você cadastrou: ${emails[0]?.email}`,
-                    type: "success",
-                    showCancel: false,
-                    confirmText: "Ok",
-                    onConfirm: () => {
-                        resolve(true)
-                    }
-                });
-                esconderSpinner();
-                showModal({
-                    title: "Dados enviados com sucesso!",
-                    message:
-                        `Em breve entraremos em contato com você, fique atento ao e-mail ou ao telefone que você informou, e lembre-se:
-                        senha cadastrada: ${senha} 
-                        e-mail referencia que você cadastrou: ${emails[0].email}`,
-                    type: "success",
-                    showCancel: false,
-                    confirmText: "Ok",
-                    onConfirm: () => {
-                        resolve(true)
-                    }
-                });
-            } catch (err) {
-                esconderSpinner();
-
-                showModal({
-                    title: err?.status === 400 ? "Erro de Validação" : "Falha ao Enviar",
-                    message:
-                        err?.status === 400
-                            ? ""
-                            : "Por favor, tente novamente.\nCaso o erro persista, contate o email: contato@aiesec.org.br",
-                    type: "error",
-                    showConfirm: false,
-                    showCancel: true,
-                    cancelText: err?.status === 400 ? "Corrigir" : "Recarregar",
-                    backendError: err?.backend,
-                    onCancel:
-                        err?.status === 400
-                            ? undefined
-                            : () => {
-                                document.getElementById("meuForm").reset();
-                                location.reload();
-                                resolve(true)
-                            }
-                });
-            }
-        })
-    })
-}
-async function enviarFormularioOpicionais() {
-    const semestre = document.getElementById("semestre");
-    const nivel = document.getElementById('nivel');
-    const areaAtuacao = document.getElementById("area-atuacao");
-    const curso = document.getElementById("curso");
-    const AreaAtuacao = [
-        "Administração",
-        "direito",
-        "tecnologia",
-        "engenharia",
-        "saúde",
-        "comunicação",
-        "ciências humanas",
-        "ciências naturais"
-    ]
-    const Mercado = ["Estagiário",
-        "Assistente/Auxiliar",
-        "Júnior (JR)",
-        "Pleno (PL)",
-        "Sênior (SR)",
-        "Especialista/Master",
-        "Liderança (Coordenador, Gerente, Diretor)"]
-    return new Promise(resolve => {
-        // Coleta e normalização dos dados do formulário para exibição e envio
-        let dados = "";
-
-        if (idiomaSelecionados.length > 0) {
-            dados += `<strong>Idiomas</strong>: ${idiomaSelecionados.map(idioma => idioma.text).join(", ")}<br>`;
+        } catch (err) {
+            esconderSpinner();
+            showModal({
+                title: "Falha ao Enviar",
+                message: "Ocorreu um erro ao enviar seus dados. Por favor, tente novamente.",
+                type: "error",
+                showConfirm: false,
+                showCancel: true,
+                cancelText: "Tentar Novamente",
+                backendError: err?.backend,
+            });
         }
-
-        if (curso && curso.value) {
-            dados += `<strong>Curso</strong>: ${curso.value}<br>`;
-        }
-
-        if (areaAtuacao && areaAtuacao.value) {
-            dados += `<strong>Área de atuação</strong>: ${AreaAtuacao[parseInt(areaAtuacao.value) - 1]}<br>`;
-        }
-
-        // Adiciona só se o campo existir
-        if (nivel && nivel.value) {
-            dados += `<strong>Profissição</strong>: ${Mercado[parseInt(nivel.value) - 1]}<br>`;
-        }
-
-        if (semestre.value) {
-            dados += `<strong>Semestre</strong>: ${semestre.value < 9 ? semestre.value : "Outro"}<br>`
-        }
-        if (dados !== "") {
-            // Mostra os dados no Modal
-            const modal = document.getElementById('exampleModalLong');
-            const myModal = new bootstrap.Modal(modal);
-            const botaoConfirmar = document.getElementById("botaoConfirmar");
-            const botaoRemover = document.getElementById("botaoCancelar");
-            const tituloModal = document.getElementById("exampleModalLongTitle");
-
-            tituloModal.textContent = "Confirme seus dados";
-            // 🔹 Restaura o estado padrão dos botões caso tenha havido erro antes
-            botaoConfirmar.style.display = 'inline-block';
-            botaoConfirmar.disabled = false;
-            botaoConfirmar.textContent = "Confirmar";
-            botaoRemover.textContent = "Editar dados";
-
-            document.getElementById("DadosAqui").innerHTML = dados;
-            myModal.show();
-            // Remove listener antigo e adiciona o novo
-            botaoConfirmar.replaceWith(botaoConfirmar.cloneNode(true));
-            const novoBotaoConfirmar = document.getElementById("botaoConfirmar");
-            novoBotaoConfirmar.addEventListener("click", async function handleSubmit(e) {
-                e.preventDefault();
-                // Fecha o modal de confirmação
-                myModal.hide();
-                mostrarSpinner();
-                // Aguarda o modal terminar de fechar
-                await esperarModalFechar(modal);
-                const data = {
-                    "id": itemID,
-                    "idiomas": idiomaSelecionados?.map(id => id.id) ?? null,
-                    "area_atuacao": parseInt(areaAtuacao?.value) ?? null,
-                    "nivel_mercado": parseInt(nivel?.value) ?? null,
-                    "curso": curso?.value ?? null,
-                    "semestre": semestre?.value ?? null,
-                }
-                // 1. Defina esta função auxiliar no seu script.js
-                const lerArquivoComoBase64 = (file) => {
-                    return new Promise((resolve, reject) => {
-                        const reader = new FileReader();
-                        // O reader deve começar a ler ANTES de definir o onload em alguns casos, 
-                        // mas o padrão correto é configurar os eventos e depois disparar a leitura.
-                        reader.onload = () => resolve(reader.result.split(',')[1]);
-                        reader.onerror = (error) => reject(error);
-                        reader.readAsDataURL(file);
-                    });
-                };
-
-                // 2. Dentro da sua função de envio principal (ex: btnNext ou btnSubmit)
-
-                const curriculoInput = document.getElementById("curriculo"); // ajuste o ID se necessário
-                const file = curriculoInput?.files[0];
-
-                if (file) {
-                    try {
-                        // ✅ O await garante que o código pare aqui até o arquivo ser convertido
-                        const base64 = await lerArquivoComoBase64(file);
-                        data.file = base64;
-                        data.fileName = file.name;
-                    } catch (e) {
-                        console.error("Erro ao ler o arquivo:", e);
-                    }
-                }
-                try {
-                    const response = await fetch("https://baziAiesec.pythonanywhere.com/adicionar-card", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(data),
-                    });
-
-                    if (!response.ok) {
-                        let backend = null;
-                        try { backend = await response.json(); } catch (_) { backend = null; }
-                        throw { status: response.status, backend };
-                    }
-
-                    const result = await response.json();
-                    itemID = result?.data?.item_id || itemID;
-
-                    esconderSpinner();
-                    showModal({
-                        title: "Dados enviados com sucesso!",
-                        message:
-                            `Valeu pelas informações adicionais! 💙`,
-                        type: "success",
-                        showCancel: false,
-                        confirmText: "Ok",
-                        onConfirm: () => {
-                            resolve(true)
-                        }
-                    });
-                } catch (err) {
-                    esconderSpinner();
-
-                    showModal({
-                        title: err?.status === 400 ? "Erro de Validação" : "Falha ao Enviar",
-                        message:
-                            err?.status === 400
-                                ? ""
-                                : "Por favor, tente novamente.\nCaso o erro persista, contate o email: contato@aiesec.org.br",
-                        type: "error",
-                        showConfirm: false,
-                        showCancel: true,
-                        cancelText: err?.status === 400 ? "Corrigir" : "Recarregar",
-                        backendError: err?.backend,
-                        onCancel:
-                            err?.status === 400
-                                ? undefined
-                                : () => {
-                                    document.getElementById("meuForm").reset();
-                                    location.reload();
-                                    resolve(true)
-                                }
-                    });
-                }
-            })
-        } else {
-            mostrarSpinner();
-            try {
-                esconderSpinner();
-            } catch (err) {
-                esconderSpinner();
-                showModal({
-                    title: err?.status === 400 ? "Erro de Validação" : "Falha ao Enviar",
-                    message:
-                        err?.status === 400
-                            ? ""
-                            : "Por favor, tente novamente.\nCaso o erro persista, contate o email: contato@aiesec.org.br",
-                    type: "error",
-                    showConfirm: false,
-                    showCancel: true,
-                    cancelText: err?.status === 400 ? "Corrigir" : "Recarregar",
-                    backendError: err?.backend,
-                    onCancel:
-                        err?.status === 400
-                            ? undefined
-                            : () => {
-                                document.getElementById("meuForm").reset();
-                                location.reload();
-                            }
-                });
-            }
-        }
-    })
+    }, { once: true });
 }
 // ============================================================================
 // -------------------- FUNÇÕES DE CONTROLE DO SPINNER ------------------------
@@ -2090,8 +1196,7 @@ function alternarVisibilidadeSenha(idSenha, idToggle) {
     if (!icone) return;
 
     // Listener de clique no ícone
-    icone.addEventListener("click", () => {
-        // Verifica se a senha está oculta
+    containerToggle.addEventListener("click", () => {
         const senhaEstaOculta = campoSenha.type === "password";
 
         // Alterna o tipo do input
@@ -2104,71 +1209,7 @@ function alternarVisibilidadeSenha(idSenha, idToggle) {
 
     // Evita perda de foco ou seleção de texto ao clicar no ícone
     icone.addEventListener("mousedown", evento => evento.preventDefault());
-}
-
-
-/**
- * Preenche seleções e ids com base nos parâmetros UTM.
- * Também inicializa 1 e-mail e 1 telefone.
- * @param {ParametrosURL} parametros
- */
-async function preencherDropdown(parametros) {
-    // 1. Produto
-    if (parametros.produto) {
-        const indiceProdutoPorSigla = siglaProduto.findIndex(p => p.sigla === parametros.produto);
-        const entryProduto = siglaProduto.find(p => p.sigla === parametros.produto);
-        if (entryProduto) {
-            const idxProduto = todosProdutos.findIndex(op => slugify(op.text) === slugify(entryProduto.nome) || slugify(op.text).includes(slugify(entryProduto.nome)));
-            selectedProductId = idxProduto >= 0 ? todosProdutos[idxProduto].id : null;
-
-        }
-    } else if (parametros.rota) { // Se o UTM de produto estiver faltando, mas a rota estiver presente
-        const productOption = todosProdutos.find(op => slugify(op.text) === parametros.rota);
-        if (productOption) selectedProductId = productOption.id;
-
-    }
-
-    // 2. Comitê AIESEC
-    if (parametros.comite) {
-        const entryCL = escritorios.find(e => e.sigla === parametros.comite);
-        if (entryCL) {
-            const idxCL = todasAiesecs.findIndex(op => slugify(op.text) === slugify(entryCL.nome) || slugify(op.text).includes(slugify(entryCL.nome)));
-            selectedCommitteeId = idxCL >= 0 ? todasAiesecs[idxCL].id : null;
-            selectedCommitteeText = entryCL.nome;
-
-        }
-    }
-
-    // 3. Como conheceu a AIESEC
-    if (parametros.anuncio) {
-        const entryCategoria = todasOpcoes_Como_Conheceu.find(opcoes => slugify(opcoes.text) === parametros.anuncio);
-        if (entryCategoria) {
-            selectedAdSourceId = entryCategoria.id;
-
-        }
-    }
-
-    // 4. Forma de anúncio
-    if (parametros.formaAnuncio) {
-        // `todasopçoes_Tipo_Anuncio` já deve estar populado globalmente em DOMContentLoaded
-        // const tipoAnuncio = campos.find(field => field.label === "Como?");
-        // const opçoes_Tipo_Anuncio = tipoAnuncio.config.settings.options;
-        // var todasopçoes_Tipo_Anuncio = opçoes_Tipo_Anuncio.reduce(
-        //     function (prev, curr) {
-        //         if (curr.status == "active") {
-        //             return [...prev, { id: curr.id, text: curr.text }];
-        //         }
-        //         return [...prev]
-        //     },
-        //     []
-        // )
-
-        const entryTipoAnuncio = todasopçoes_Tipo_Anuncio.find(opcoes => slugify(opcoes.text) === slugify(parametros.formaAnuncio));
-        if (entryTipoAnuncio) {
-            selectedAdFormId = entryTipoAnuncio.id;
-
-        }
-    }
+    containerToggle.addEventListener("mousedown", evento => evento.preventDefault());
 }
 
 /**
@@ -2177,19 +1218,18 @@ async function preencherDropdown(parametros) {
  */
 async function ParamentroURL() {
     const params = new URLSearchParams(window.location.search);
-    const rota = slugify((params.get("rota") || ""))
-    const comite = (params.get("utm_term") || "").toUpperCase();
-    const produto = (params.get("utm_content") || "").toLowerCase();
-    const campanha = decodeURIComponent(params.get("utm_campaign") || "");
-    const anuncio = (params.get("utm_source") || "").toLowerCase();
-    const formaAnuncio = (params.get("utm_medium") || "").toLowerCase();
+    const id = params.get('id') || null;
+    const nome = decodeURIComponent(params.get('nome') || '');
+    const sobrenome = decodeURIComponent(params.get('sobrenome') || '');
+    const email = decodeURIComponent(params.get('email') || '');
+    const telefone = decodeURIComponent(params.get('telefone') || '');
+    const data_nasc = decodeURIComponent(params.get('data_nasc') || '');
+    const produto = params.get('produto') || null; // idProdutoExpa
+    const nomeCl = decodeURIComponent(params.get('nomeCl') || '');
+    const comite = params.get('comite') || null;
+
     return {
-        comite,
-        produto,
-        campanha,
-        anuncio,
-        formaAnuncio,
-        rota
+        id, nome, sobrenome, email, telefone, data_nasc, produto, nomeCl, comite
     };
 }
 /**
@@ -2293,132 +1333,3 @@ function iniciarValidacaoSenha(idSenha, idFeedback) {
 
     });
 }
-
-function updateProgress() {
-    document.getElementById("progress").innerText =
-        `Etapa ${currentStage + 1} de ${TOTAL_STAGES}`;
-}
-
-function fecharModalSeAberto() {
-    const modalEl = document.getElementById('exampleModalLong');
-    if (!modalEl) return;
-
-    const modalInst = bootstrap.Modal.getInstance(modalEl);
-    if (modalInst) {
-        modalInst.hide();
-    }
-
-    // Remover backdrop residual para evitar sobreposição fixa na tela
-    const backdrop = document.querySelector('.modal-backdrop');
-    if (backdrop) {
-        backdrop.remove();
-    }
-
-    // Resetar body overflow caso tenha ficado travado
-    document.body.classList.remove('modal-open');
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
-}
-
-function showStage(index) {
-    fecharModalSeAberto();
-
-    stages.forEach((stage, i) => {
-        stage.classList.toggle("active", i === index);
-    });
-
-    currentStage = index;
-    toggleStageInputs(index);
-    updateProgress();
-    updateButtons();
-}
-
-
-function updateButtons() {
-    //btnPrev.disabled = true//currentStage === 0;
-
-    // Último stage → muda texto do botão
-    if (currentStage === TOTAL_STAGES - 1) {
-        btnNext.textContent = "Enviar";
-    } else {
-        btnNext.textContent = "Continuar";
-    }
-}
-
-function toggleStageInputs(activeIndex) {
-    stages.forEach((stage, index) => {
-        const inputs = stage.querySelectorAll("input, select, textarea");
-
-        inputs.forEach(input => {
-            input.disabled = index !== activeIndex;
-        });
-    });
-}
-
-
-btnNext.addEventListener("click", async () => {
-    if (validarDadosObrigatorios() && currentStage === 0) {
-        if (passou == 0) {
-            const ok = await enviarFormularioObrigatorio();
-            if (!ok) return;
-        }
-
-        if (currentStage < TOTAL_STAGES - 1) {
-            showStage(currentStage + 1);
-            criarCamposOpicionais(selectedProductId);
-            passou += 1
-        }
-    } else if (validarDadosOpcionais() && passou == 1 && currentStage === 1) {
-        const ok = await enviarFormularioOpicionais();
-        if (!ok) return;
-        passou = 0
-        // 1. Volta para o primeiro estágio
-        showStage(0);
-        // 2. Reseta o formulário HTML (limpa inputs de texto, e-mail, etc.)
-        const form = document.getElementById("meuForm");
-        if (form) {
-            form.reset();
-            location.reload();
-        }
-
-        // 3. Limpa campos específicos e variáveis de estado
-        // Limpa o container de tags de idiomas
-        idiomaSelecionados.length = 0;
-        const tagsIdiomas = document.getElementById("tags-idiomas");
-        if (tagsIdiomas) tagsIdiomas.innerHTML = '';
-
-        // Limpa campos de data (ISO e visível)
-        const inputVisivel = document.getElementById('nascimento');
-        const inputISO = document.getElementById('nascimento-iso');
-        if (inputVisivel) inputVisivel.value = '';
-        if (inputISO) inputISO.value = '';
-
-        // Limpa campos criados dinamicamente no stage opcional
-        idiomas.innerHTML = '';
-        cursos.innerHTML = '';
-        atuacao.innerHTML = '';
-        mercado.innerHTML = '';
-
-        // 4. Reinicializa os campos obrigatórios (Produto, AIESEC, etc.)
-        criarCampos(parametros.produto, parametros.comite, parametros.anuncio, parametros.rota);
-    }
-});
-
-function esperarModalFechar(modal) {
-    return new Promise(resolve => {
-        modal.addEventListener('hidden.bs.modal', function handler() {
-            modal.removeEventListener('hidden.bs.modal', handler);
-            resolve(false);
-        });
-    });
-}
-
-
-/*btnPrev.addEventListener("click", () => {
-    if (currentStage > 0) {
-        showStage(currentStage - 1);
-    }
-});*/
-
-// Inicializa corretamente
-showStage(0);

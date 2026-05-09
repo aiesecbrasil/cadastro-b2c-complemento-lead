@@ -1,0 +1,5 @@
+# Diretório de configuração do Qodana
+.qodo
+
+# Outras sugestões comuns para projetos web
+/node_modules
