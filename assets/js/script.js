@@ -1041,7 +1041,7 @@ async function handleFormCompletionSubmit(event) {
         mostrarSpinner();
 
         try {
-            const response = await fetch("https://baziAiesec.pythonanywhere.com/adicionar-card", {
+            const response = await fetch("https://baziAiesec.pythonanywhere.com/adicionar-card-b2c-lead", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
@@ -1061,7 +1061,7 @@ async function handleFormCompletionSubmit(event) {
                 showCancel: false,
                 confirmText: "OK",
                 onConfirm: () => {
-                    window.location.href = 'http://localhost:5500/';
+                    window.location.href = 'https://aiesec.org.br/';
                 }
             });
 
